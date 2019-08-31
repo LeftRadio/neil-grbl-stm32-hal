@@ -1,0 +1,3 @@
+[submodule "Drivers/ngrbl"]
+	path = Drivers/ngrbl
+	url = https://github.com/LeftRadio/neil-grbl
