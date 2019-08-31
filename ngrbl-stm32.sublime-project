@@ -1,0 +1,25 @@
+{
+    "build_systems":
+    [
+        {
+            "cmd": ["make", "-j16"],
+            "file_regex": "^(.*):(\\d+):(\\d+):\\s*(.*)$",
+            "name": "STM32 build",
+            "variants":
+            [
+                {
+                    "cmd": ["make", "-j16", "clean" ],
+                    "name": "Clean",
+                    "windows": {"cmd": ["mingw32-make", "-j16", "clean"]}
+                },
+                {
+                    "shell_cmd": "stm32flash -b 460800 -w ${project_path}/build/stepper-driver.bin -v /dev/ttyUSB0",
+                    "name": "Flash"
+                }
+            ],
+            "windows": {"cmd": ["mingw32-make", "-j16"]},
+            "working_dir": "${project_path}"
+        }
+    ],
+    "folders": [{"path": "."}],
+}
