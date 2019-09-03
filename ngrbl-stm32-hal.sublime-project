@@ -1,0 +1,58 @@
+{
+	"build_systems":
+	[
+		{
+			"cmd":
+			[
+				"make",
+				"-j32"
+			],
+			"file_regex": "^(.*):(\\d+):(\\d+):\\s*(.*)$",
+			"name": "STM32 build",
+			"variants":
+			[
+				{
+					"cmd":
+					[
+						"make",
+						"-j32",
+						"clean"
+					],
+					"name": "Clean",
+					"windows":
+					{
+						"cmd":
+						[
+							"mingw32-make",
+							"-j32",
+							"clean"
+						]
+					}
+				},
+				{
+					"name": "Flash BOOT",
+					"shell_cmd": "stm32flash -b 460800 -w ${project_path}/build/ngrbl-stm32.bin -v /dev/ttyUSB0"
+				},
+				{
+					"name": "Flash ST-LINK",
+					"shell_cmd": "st-flash write ${project_path}/build/ngrbl-stm32.bin 0x08000000"
+				}
+			],
+			"windows":
+			{
+				"cmd":
+				[
+					"mingw32-make",
+					"-j32"
+				]
+			},
+			"working_dir": "${project_path}"
+		}
+	],
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	]
+}
